@@ -1,100 +1,173 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [textState, setTextState] = useState({ index: 0, text: "" });
+  const intervalId = useRef<NodeJS.Timeout | null>(null);
+  const fullText = "Hi I'm Thienan";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  useEffect(() => {
+    intervalId.current = setInterval(
+      () =>
+        setTextState((prevTextState) => {
+          if (prevTextState.index < fullText.length) {
+            return {
+              index: prevTextState.index + 1,
+              text: prevTextState.text + fullText.charAt(prevTextState.index),
+            };
+          } else {
+            clearInterval(intervalId.current as NodeJS.Timeout);
+            return { ...prevTextState };
+          }
+        }),
+      100
+    );
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <main className="container mx-auto px-4">
+        <section className="py-20 flex flex-col md:flex-row items-center justify-between">
+          <div className="md:w-1/2 mb-8 md:mb-0">
+            <h1 className="text-5xl font-bold text-foreground mb-4 h-20">
+              {textState.text}
+              <span className="animate-blink">|</span>
+            </h1>
+          </div>
+          <div className="md:w-1/2">
             <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/placeholder.svg"
+              alt="Thienan's Profile"
+              width={400}
+              height={400}
+              className="rounded-full bg-muted mx-auto"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+          </div>
+        </section>
+
+        <section className="py-20">
+          <h2 className="text-3xl font-bold text-foreground mb-8">
+            My Approach to Work
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            I believe in creating innovative solutions through collaborative
+            effort and continuous learning. My approach combines cutting-edge
+            technology with user-centric design, ensuring that every project not
+            only meets but exceeds expectations. I'm passionate about pushing
+            the boundaries of what's possible in web development, always
+            striving for efficiency, scalability, and elegant code.
+          </p>
+        </section>
+
+        <section className="py-20">
+          <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
+            In the works:
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map((project) => (
+              <Card key={project} className="overflow-hidden border-accent">
+                <Image
+                  src="/placeholder.svg"
+                  alt={`Project ${project}`}
+                  width={300}
+                  height={200}
+                  className="w-full h-48 object-cover"
+                />
+                <CardHeader className="p-4">
+                  <CardTitle className="text-lg text-foreground">
+                    Project {project}
+                  </CardTitle>
+                  <CardDescription className="text-sm text-muted-foreground">
+                    Exciting new project coming soon. Stay tuned for updates!
+                  </CardDescription>
+                </CardHeader>
+                <CardFooter className="p-4 pt-0">
+                  <Button
+                    size="sm"
+                    className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
+                  >
+                    Coming Soon
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="py-20">
+          <h2 className="text-3xl font-bold text-foreground mb-8">
+            Get in Touch
+          </h2>
+          <form className="max-w-md mx-auto space-y-4">
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                className="w-full px-3 py-2 bg-background border border-input rounded-md"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                className="w-full px-3 py-2 bg-background border border-input rounded-md"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-foreground mb-2"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                required
+                className="w-full px-3 py-2 bg-background border border-input rounded-md"
+              ></textarea>
+            </div>
+            <Button
+              type="submit"
+              className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
+            >
+              Send Message
+            </Button>
+          </form>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="bg-primary text-primary-foreground py-8">
+        <div className="container mx-auto text-center">
+          <p>&copy; 2023 Thienan. All rights reserved.</p>
+        </div>
       </footer>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,6 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Show } from "@/components/Show";
 import { useState, useEffect, useRef } from "react";
+import { Github, Linkedin, Mail, FileText } from "lucide-react";
 interface Project {
   name: string;
   description: string;
@@ -53,9 +55,54 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-background px-60">
-      <main className="container mx-auto">
-        <section className="py-20 flex flex-col md:flex-row items-center justify-between">
+    <div className="min-h-screen bg-background">
+      <div className="bg-background">
+        <div className="text-foreground py-2 px-4">
+          <div className="container mx-auto flex justify-between items-center">
+            <div className="flex space-x-4">
+              <Link
+                href="mailto:thienantranbusiness@gmail.com"
+                className="flex items-center transition-colors"
+              >
+                <Mail className="w-5 h-5 mr-2" />
+                thienantranbusiness@gmail.com
+              </Link>
+              <Link
+                href="/Thienan_Tran_resume.pdf"
+                className="flex items-center transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FileText className="w-5 h-5 mr-2" />
+                Resume
+              </Link>
+            </div>
+            <div className="flex space-x-4">
+              <Link
+                href="https://www.linkedin.com/in/thienan-tran-35176620b/"
+                className="flex items-center transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="w-5 h-5 mr-2" />
+                LinkedIn
+              </Link>
+              <Link
+                href="https://github.com/thienantran010"
+                className="flex items-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="w-5 h-5 mr-2" />
+                GitHub
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <main className="container mx-auto px-60">
+        <section className="min-h-screen pb-20 flex flex-col md:flex-row items-center justify-between">
           <div className="flex flex-col space-y-4">
             <h1 className="text-5xl font-bold text-foreground flex items-center">
               {textState.text}
@@ -77,11 +124,10 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-foreground mb-8">About</h2>
           <div className="flex flex-col space-y-7">
             <p className="text-lg text-foreground">
-              I'm Thienan, a recent graduate from Boston University with a
-              strong foundation in software engineering, specifically in
-              building robust applications using React, tRPC, and Prisma. I’ve
-              also gained valuable experience working as a Junior Software
-              Engineer at a startup called Pelicargo. Here are some of my feats
+              I'm Thienan, a recent graduate from Boston University. While I was
+              a junior software engineer at a startup, I gained valuable
+              experience in building and maintaining web applications developed
+              with the React, tRPC, and Prisma stack. Here are some of my feats
               💪:
             </p>
             <ul className="list-disc list-inside space-y-3 pl-6">

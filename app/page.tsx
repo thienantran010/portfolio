@@ -1,20 +1,30 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Show } from "@/components/Show";
+import { useState, useEffect, useRef } from "react";
+interface Project {
+  name: string;
+  description: string;
+  pic?: string;
+  github?: string;
+  link?: string;
+}
 
 export default function Home() {
   const [textState, setTextState] = useState({ index: 0, text: "" });
   const intervalId = useRef<NodeJS.Timeout | null>(null);
-  const fullText = "Hi I'm Thienan";
+  const fullText = "Hi, I'm Thienan!";
 
   useEffect(() => {
     intervalId.current = setInterval(
@@ -34,70 +44,111 @@ export default function Home() {
     );
   }, []);
 
+  const projects = [
+    {
+      name: "Eat Here",
+      description:
+        "Sources local food deals to make a smart decision on where to eat",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
-      <main className="container mx-auto px-4">
+    <div className="min-h-screen bg-background px-60">
+      <main className="container mx-auto">
         <section className="py-20 flex flex-col md:flex-row items-center justify-between">
-          <div className="md:w-1/2 mb-8 md:mb-0">
-            <h1 className="text-5xl font-bold text-foreground mb-4 h-20">
+          <div className="flex flex-col space-y-4">
+            <h1 className="text-5xl font-bold text-foreground flex items-center">
               {textState.text}
               <span className="animate-blink">|</span>
             </h1>
           </div>
-          <div className="md:w-1/2">
+          <div>
             <Image
-              src="/placeholder.svg"
-              alt="Thienan's Profile"
+              src="/headshot.jpg"
+              alt="Thienan's Profile Picture"
               width={400}
               height={400}
-              className="rounded-full bg-muted mx-auto"
+              className="rounded-full bg-muted"
             />
           </div>
         </section>
 
         <section className="py-20">
-          <h2 className="text-3xl font-bold text-foreground mb-8">
-            My Approach to Work
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            I believe in creating innovative solutions through collaborative
-            effort and continuous learning. My approach combines cutting-edge
-            technology with user-centric design, ensuring that every project not
-            only meets but exceeds expectations. I'm passionate about pushing
-            the boundaries of what's possible in web development, always
-            striving for efficiency, scalability, and elegant code.
-          </p>
+          <h2 className="text-3xl font-bold text-foreground mb-8">About</h2>
+          <div className="flex flex-col space-y-7">
+            <p className="text-lg text-foreground">
+              I'm Thienan, a recent graduate from Boston University with a
+              strong foundation in software engineering, specifically in
+              building robust applications using React, tRPC, and Prisma. I’ve
+              also gained valuable experience working as a Junior Software
+              Engineer at a startup called Pelicargo. Here are some of my feats
+              💪:
+            </p>
+            <ul className="list-disc list-inside space-y-3 pl-6">
+              <li className="text-lg font-medium">
+                Diagnosed and fixed a critical emailing bug right before a
+                release, keeping the team on track.
+              </li>
+              <li className="text-lg font-medium">
+                Spearheaded a system-wide migration from Yup to Zod to eliminate
+                type issues and bugs.
+              </li>
+              <li className="text-lg font-medium">
+                Explored and integrated the HubSpot API to automate newsletter
+                signups and emails (wow I worked with emails a lot).
+              </li>
+            </ul>
+            <p className="text-lg text-foreground">
+              I'm passionate about software that solves everyday problems. Take
+              a peek at my projects to learn more!
+            </p>
+          </div>
         </section>
 
         <section className="py-20">
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
-            In the works:
+            Projects:
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((project) => (
-              <Card key={project} className="overflow-hidden border-accent">
-                <Image
-                  src="/placeholder.svg"
-                  alt={`Project ${project}`}
-                  width={300}
-                  height={200}
-                  className="w-full h-48 object-cover"
-                />
-                <CardHeader className="p-4">
-                  <CardTitle className="text-lg text-foreground">
-                    Project {project}
+          <div className="flex">
+            {projects.map((project) => (
+              <Card
+                key={project.name}
+                className="overflow-hidden border-accent w-full max-w-md mx-auto relative"
+              >
+                <CardHeader className="p-6">
+                  <CardTitle className="text-xl font-bold text-foreground flex justify-between">
+                    {project.name}
+                    {!project.link && !project.github && (
+                      <Badge className="bg-blue-500">Coming Soon</Badge>
+                    )}
                   </CardTitle>
-                  <CardDescription className="text-sm text-muted-foreground">
-                    Exciting new project coming soon. Stay tuned for updates!
-                  </CardDescription>
                 </CardHeader>
-                <CardFooter className="p-4 pt-0">
-                  <Button
-                    size="sm"
-                    className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
-                  >
-                    Coming Soon
-                  </Button>
+                <CardContent>
+                  <CardDescription className="text-md">
+                    {project.description}
+                  </CardDescription>
+                </CardContent>
+                <CardFooter className="p-6 pt-0 flex gap-4 justify-center">
+                  <Show if={project.link}>
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                    >
+                      View Project
+                    </a>
+                  </Show>
+                  <Show if={project.github}>
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700"
+                    >
+                      GitHub
+                    </a>
+                  </Show>
                 </CardFooter>
               </Card>
             ))}
@@ -121,7 +172,7 @@ export default function Home() {
                 id="name"
                 name="name"
                 required
-                className="w-full px-3 py-2 bg-background border border-input rounded-md"
+                className="w-full py-2 bg-background border border-input rounded-md"
               />
             </div>
             <div>
@@ -136,7 +187,7 @@ export default function Home() {
                 id="email"
                 name="email"
                 required
-                className="w-full px-3 py-2 bg-background border border-input rounded-md"
+                className="w-full py-2 bg-background border border-input rounded-md"
               />
             </div>
             <div>
@@ -151,7 +202,7 @@ export default function Home() {
                 name="message"
                 rows={4}
                 required
-                className="w-full px-3 py-2 bg-background border border-input rounded-md"
+                className="w-full py-2 bg-background border border-input rounded-md"
               ></textarea>
             </div>
             <Button

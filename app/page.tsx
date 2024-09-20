@@ -109,14 +109,14 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
             Projects:
           </h2>
-          <div className="flex">
+          <div className="flex flex-wrap justify-center gap-6">
             {projects.map((project) => (
               <Card
                 key={project.name}
-                className="overflow-hidden border-accent w-full max-w-md mx-auto relative"
+                className="bg-gray-100 text-gray-900 border border-gray-300 shadow-md w-full max-w-md mx-auto relative"
               >
                 <CardHeader className="p-6">
-                  <CardTitle className="text-xl font-bold text-foreground flex justify-between">
+                  <CardTitle className="text-xl font-bold flex justify-between">
                     {project.name}
                     {!project.link && !project.github && (
                       <Badge className="bg-blue-500">Coming Soon</Badge>
@@ -156,14 +156,14 @@ export default function Home() {
         </section>
 
         <section className="py-20">
-          <h2 className="text-3xl font-bold text-foreground mb-8">
+          <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
             Get in Touch
           </h2>
-          <form className="max-w-md mx-auto space-y-4">
+          <form className="max-w-md mx-auto space-y-6 bg-gray-100 p-6 rounded-md shadow-md border border-gray-300">
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-foreground mb-2"
+                className="block text-sm font-medium text-gray-900 mb-2"
               >
                 Name
               </label>
@@ -172,13 +172,13 @@ export default function Home() {
                 id="name"
                 name="name"
                 required
-                className="w-full py-2 bg-background border border-input rounded-md"
+                className="w-full py-2 px-3 bg-white border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-foreground mb-2"
+                className="block text-sm font-medium text-gray-900 mb-2"
               >
                 Email
               </label>
@@ -187,13 +187,13 @@ export default function Home() {
                 id="email"
                 name="email"
                 required
-                className="w-full py-2 bg-background border border-input rounded-md"
+                className="w-full py-2 px-3 bg-white border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm font-medium text-foreground mb-2"
+                className="block text-sm font-medium text-gray-900 mb-2"
               >
                 Message
               </label>
@@ -202,24 +202,18 @@ export default function Home() {
                 name="message"
                 rows={4}
                 required
-                className="w-full py-2 bg-background border border-input rounded-md"
+                className="w-full py-2 px-3 bg-white border border-gray-300 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               ></textarea>
             </div>
             <Button
               type="submit"
-              className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
+              className="w-full bg-blue-500 hover:bg-blue-600"
             >
               Send Message
             </Button>
           </form>
         </section>
       </main>
-
-      <footer className="bg-primary text-primary-foreground py-8">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2023 Thienan. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 }

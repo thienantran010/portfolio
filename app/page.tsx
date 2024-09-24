@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -16,6 +15,13 @@ import { Show } from "@/components/Show";
 import { useState, useEffect, useRef } from "react";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import CopyableText from "@/components/CopyableText";
+
+interface Projects {
+  name: string;
+  description: string;
+  github?: string;
+  link?: string;
+}
 
 export default function Home() {
   const [textState, setTextState] = useState({ index: 0, text: "" });
@@ -40,11 +46,11 @@ export default function Home() {
     );
   }, []);
 
-  const projects = [
+  const projects: Projects[] = [
     {
       name: "Eat Here",
       description:
-        "Sources local food deals to make a smart decision on where to eat",
+        "Sources local food deals so you can make a smart decision on where to eat",
     },
   ];
 
@@ -170,7 +176,7 @@ export default function Home() {
                   </CardDescription>
                 </CardContent>
                 <CardFooter className="p-6 pt-0 flex gap-4 justify-center">
-                  <Show if={project.link}>
+                  <Show if={!!project.link}>
                     <a
                       href="#"
                       target="_blank"
@@ -180,7 +186,7 @@ export default function Home() {
                       View Project
                     </a>
                   </Show>
-                  <Show if={project.github}>
+                  <Show if={!!project.github}>
                     <a
                       href="#"
                       target="_blank"

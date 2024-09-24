@@ -125,8 +125,8 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-foreground mb-8">About</h2>
           <div className="flex flex-col space-y-7">
             <p className="text-lg text-foreground">
-              I'm Thienan, a recent graduate from Boston University. While I was
-              a junior software engineer at a startup, I gained valuable
+              I&apos;m Thienan, a recent graduate from Boston University. While
+              I was a junior software engineer at a startup, I gained valuable
               experience in building and maintaining web applications developed
               with the React, tRPC, and Prisma stack. Here are some of my feats
               💪:
@@ -146,8 +146,8 @@ export default function Home() {
               </li>
             </ul>
             <p className="text-lg text-foreground">
-              I'm passionate about software that solves everyday problems. Take
-              a peek at my projects to learn more!
+              I&apos;m passionate about software that solves everyday problems.
+              Take a peek at my projects to learn more!
             </p>
           </div>
         </section>

@@ -10,13 +10,21 @@ import { Badge } from "@/components/ui/badge";
 import { Show } from "@/components/Show";
 import Animation from "./animation";
 import Navbar from "./navbar";
-
+import { ReactNode } from "react";
 interface Projects {
   name: string;
   description: string;
   github?: string;
   link?: string;
 }
+
+interface BlueTextProps {
+  children: ReactNode;
+}
+
+const BlueText = ({ children }: BlueTextProps) => {
+  return <span className="text-blue-500">{children}</span>;
+};
 
 export default function Home() {
   const projects: Projects[] = [
@@ -46,16 +54,31 @@ export default function Home() {
             </p>
             <ul className="list-disc list-inside space-y-3 pl-6">
               <li className="text-lg font-medium">
-                Diagnosed and fixed a critical emailing bug right before a
-                release, keeping the team on track.
+                Enhanced the <BlueText>React</BlueText>-based customer booking
+                platform by introducing features like filtering, sorting, and
+                expanded data displays, significantly boosting user engagement
+                and experience
               </li>
               <li className="text-lg font-medium">
-                Spearheaded a system-wide migration from Yup to Zod to eliminate
-                type issues and bugs.
+                Extended <BlueText>tRPC</BlueText> functions and updated the{" "}
+                <BlueText>Prisma</BlueText> schema to link surcharges with
+                customer accounts, automating a substantial portion of admin
+                tasks and improving operational efficiency
               </li>
               <li className="text-lg font-medium">
-                Explored and integrated the HubSpot API to automate newsletter
-                signups and emails (wow I worked with emails a lot).
+                Overhauled the <BlueText>Typesense</BlueText> schema and
+                refactored React components to flag new customers, allowing the
+                team to prioritize new customers, improving retention
+              </li>
+              <li className="text-lg font-medium">
+                Optimized <BlueText>Docker</BlueText> configurations by
+                improving image layering and caching, reducing build times by 30
+                minutes per deployment and increasing development speed
+              </li>
+              <li className="text-lg font-medium">
+                Spearheaded the migration from <BlueText>Yup</BlueText> to{" "}
+                <BlueText>Zod</BlueText> for improved input validation and type
+                safety, reducing the risk of server crashes and bugs
               </li>
             </ul>
             <p className="text-lg text-foreground">

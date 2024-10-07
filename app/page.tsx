@@ -1,7 +1,3 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -12,9 +8,8 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Show } from "@/components/Show";
-import { useState, useEffect, useRef } from "react";
-import { Github, Linkedin, Mail, FileText } from "lucide-react";
-import CopyableText from "@/components/CopyableText";
+import Animation from "./animation";
+import Navbar from "./navbar";
 
 interface Projects {
   name: string;
@@ -24,28 +19,6 @@ interface Projects {
 }
 
 export default function Home() {
-  const [textState, setTextState] = useState({ index: 0, text: "" });
-  const intervalId = useRef<NodeJS.Timeout | null>(null);
-  const fullText = "Hi, I'm Thienan!";
-
-  useEffect(() => {
-    intervalId.current = setInterval(
-      () =>
-        setTextState((prevTextState) => {
-          if (prevTextState.index < fullText.length) {
-            return {
-              index: prevTextState.index + 1,
-              text: prevTextState.text + fullText.charAt(prevTextState.index),
-            };
-          } else {
-            clearInterval(intervalId.current as NodeJS.Timeout);
-            return { ...prevTextState };
-          }
-        }),
-      100
-    );
-  }, []);
-
   const projects: Projects[] = [
     {
       name: "Eat Here",
@@ -55,73 +28,13 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="bg-background">
-        <div className="text-foreground py-2 px-4">
-          <div className="container mx-auto flex justify-between items-center">
-            <div className="flex space-x-4">
-              <CopyableText textToCopy="thienantranbusiness@gmail.com">
-                <Mail className="w-5 h-5 mr-2" />
-                thienantranbusiness@gmail.com
-              </CopyableText>
-              <Link
-                href="mailto:thienantranbusiness@gmail.com"
-                className="flex items-center transition-colors"
-              ></Link>
-              <Link
-                href="/Thienan_Tran_resume.pdf"
-                className="flex items-center transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FileText className="w-5 h-5 mr-2" />
-                Resume
-              </Link>
-            </div>
-            <div className="flex space-x-4">
-              <Link
-                href="https://www.linkedin.com/in/thienan-tran-35176620b/"
-                className="flex items-center transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Linkedin className="w-5 h-5 mr-2" />
-                LinkedIn
-              </Link>
-              <Link
-                href="https://github.com/thienantran010"
-                className="flex items-center"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="w-5 h-5 mr-2" />
-                GitHub
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="bg-background">
+      <Navbar />
 
-      <main className="container mx-auto px-60">
-        <section className="min-h-screen pb-20 flex flex-col md:flex-row items-center justify-between">
-          <div className="flex flex-col space-y-4">
-            <h1 className="text-5xl font-bold text-foreground flex items-center">
-              {textState.text}
-              <span className="animate-blink">|</span>
-            </h1>
-          </div>
-          <div>
-            <Image
-              src="/headshot.jpg"
-              alt="Thienan's Profile Picture"
-              width={400}
-              height={400}
-              className="rounded-full bg-muted"
-            />
-          </div>
-        </section>
+      <main className="container mx-auto flex-col space-y-20 px-4 md:px-60">
+        <Animation />
 
-        <section className="py-20">
+        <section className="align-center">
           <h2 className="text-3xl font-bold text-foreground mb-8">About</h2>
           <div className="flex flex-col space-y-7">
             <p className="text-lg text-foreground">
@@ -152,7 +65,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-20">
+        <section className="pb-20">
           <h2 className="text-3xl font-bold text-foreground mb-8 text-center">
             Projects:
           </h2>

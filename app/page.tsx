@@ -31,7 +31,8 @@ export default function Home() {
     {
       name: "Eat Here",
       description:
-        "Sources local food deals so you can make a smart decision on where to eat",
+        "Aggregates food deals so you can make a smart decision on where to eat. Only has Dominos so far 😂",
+      link: "https://eat-here-chi.vercel.app/",
     },
   ];
 
@@ -54,31 +55,26 @@ export default function Home() {
             </p>
             <ul className="list-disc list-inside space-y-3 pl-6">
               <li className="text-lg font-medium">
-                Enhanced the <BlueText>React</BlueText>-based customer booking
-                platform by introducing features like filtering, sorting, and
-                expanded data displays, significantly boosting user engagement
-                and experience
+                Enhanced the customer booking platform built with{" "}
+                <BlueText>TypeScript</BlueText> and <BlueText>React</BlueText>{" "}
+                by implementing features such as filtering, sorting, and
+                expanded data displays, leading to a more intuitive user
+                experience and increased engagement
               </li>
               <li className="text-lg font-medium">
-                Extended <BlueText>tRPC</BlueText> functions and updated the{" "}
-                <BlueText>Prisma</BlueText> schema to link surcharges with
-                customer accounts, automating a substantial portion of admin
-                tasks and improving operational efficiency
+                Optimized <BlueText>Docker</BlueText> configurations, reducing
+                image build times by 30 minutes per deployment, streamlining
+                development and deployment pipelines
               </li>
               <li className="text-lg font-medium">
-                Overhauled the <BlueText>Typesense</BlueText> schema and
-                refactored React components to flag new customers, allowing the
-                team to prioritize new customers, improving retention
+                Migrated input validation from <BlueText>Yup</BlueText> to{" "}
+                <BlueText>Zod</BlueText>, enhancing type safety and reducing the
+                risk of server crashes during booking and account updates
               </li>
               <li className="text-lg font-medium">
-                Optimized <BlueText>Docker</BlueText> configurations by
-                improving image layering and caching, reducing build times by 30
-                minutes per deployment and increasing development speed
-              </li>
-              <li className="text-lg font-medium">
-                Spearheaded the migration from <BlueText>Yup</BlueText> to{" "}
-                <BlueText>Zod</BlueText> for improved input validation and type
-                safety, reducing the risk of server crashes and bugs
+                Fixed a critical bug in a form on the internal admin website,
+                that caused emails to be sent to third parties, eliminating
+                potential legal risks for the company
               </li>
             </ul>
             <p className="text-lg text-foreground">
@@ -114,7 +110,7 @@ export default function Home() {
                 <CardFooter className="p-6 pt-0 flex gap-4 justify-center">
                   <Show if={!!project.link}>
                     <a
-                      href="#"
+                      href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
@@ -124,7 +120,7 @@ export default function Home() {
                   </Show>
                   <Show if={!!project.github}>
                     <a
-                      href="#"
+                      href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-block bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700"
